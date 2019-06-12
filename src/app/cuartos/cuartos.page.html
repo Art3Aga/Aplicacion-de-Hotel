@@ -1,0 +1,207 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios" color="secondary">
+    <ion-buttons mode="ios" slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon mode="ios" slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="light" text-center>{{cuartos['titulo']}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    
+    <!--<ion-card>
+        <ion-slides pager="true">
+          <ion-slide>
+            <ion-img [src]="cuartos['imgScroll1']"></ion-img>
+          </ion-slide>
+          <ion-slide>
+            <ion-img [src]="cuartos['imgScroll2']"></ion-img>
+          </ion-slide>
+          <ion-slide>
+            <ion-img [src]="cuartos['imgScroll3']"></ion-img>
+          </ion-slide>
+          <ion-slide>
+            <ion-img [src]="cuartos['imgScroll4']"></ion-img>
+           </ion-slide>
+        </ion-slides>
+        <ion-card-header>
+          <ion-card-subtitle>{{cuartos['titulo']}}</ion-card-subtitle>
+          <ion-card-title><a>{{cuartos['precio24h'] | currency:'USD'}}/Noche</a></ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+
+          <br>
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="https://d500.epimg.net/cincodias/imagenes/2018/01/30/lifestyle/1517340431_201503_1517340832_noticia_normal.jpg">
+            </ion-avatar>
+            <ion-label>{{cuartos['detalle1']}}</ion-label>
+            <ion-icon color="success" slot="end" name="checkmark-circle-outline"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="https://www.mamparasduchaonline.es/Files/119100/Img/16/mampara-de-ducha-becrisa-modelo-manhattan-2f-2c.jpg">
+            </ion-avatar>
+            <ion-label>{{cuartos['detalle2']}}</ion-label>
+            <ion-icon color="success" slot="end" name="checkmark-circle-outline"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="https://www.sony.co.th/image/7072bec3e044d367e2a30bd8a85a6c13?fmt=pjpeg&bgcolor=FFFFFF&bgc=FFFFFF&wid=2515&hei=1320">
+            </ion-avatar>
+            <ion-label>{{cuartos['detalle3']}}</ion-label>
+            <ion-icon color="success" slot="end" name="checkmark-circle-outline"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label text-capitalize>{{cuartos['estado']}}</ion-label>
+            <ion-icon color="danger" slot="end" name="close-circle-outline"></ion-icon>
+            </ion-item>
+          <ion-item-divider>
+            <ion-label>Medidas Cama</ion-label>
+            <ion-item>
+              <ion-label>{{cuartos['medidaCama']}}</ion-label>
+            </ion-item>
+          </ion-item-divider>
+          <ion-item-divider>
+            <ion-label>Medidas Cuarto</ion-label>
+            <ion-item>
+              <ion-label>{{cuartos['medidaCuarto']}}</ion-label>
+            </ion-item>
+          </ion-item-divider>
+          <br>
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col size="6">
+                  <ion-button text-capitalize (click)="addFavoritos(cuartos)" color="danger">
+                    <ion-icon slot="end" name="heart"></ion-icon>
+                    Favoritos
+                  </ion-button>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-button (click)="reservarModal(cuartos)" text-capitalize color="primary">
+                    <ion-icon slot="end" name="hand"></ion-icon>
+                    Reservar
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+        </ion-card-content>
+      </ion-card>-->
+
+      <div class="imagenes">
+        <ion-slides #slides pager="false" (ionSlidesDidLoad)="autoPlay(slides)" [options]="slideOpts"
+        (ionSlideTap)="autoPlay(slides)" 
+        (ionSlideDidChange)="autoPlay(slides)" class="slidess" mode="ios" pager="ios" scrollbar="ios">
+          <ion-slide>
+            <ion-img [src]="cuartos['imgScroll1']"></ion-img>
+          </ion-slide>
+          <ion-slide>
+            <ion-img [src]="cuartos['imgScroll2']"></ion-img>
+          </ion-slide>
+          <ion-slide>
+            <ion-img [src]="cuartos['imgScroll3']"></ion-img>
+          </ion-slide>
+          <ion-slide>
+            <ion-img [src]="cuartos['imgScroll4']"></ion-img>
+           </ion-slide>
+        </ion-slides>
+      </div>
+      <ion-grid no-padding>
+        <ion-row>
+          <ion-col sizeLg="12" sizeMd="12" sizeSm="12" sizeXs="12">
+              <ion-item-group mode="ios">
+                  <ion-item-divider mode="ios">
+                    <ion-label>SERVICIOS</ion-label>
+                  </ion-item-divider>
+                  <ion-item mode="ios" lines="none" *ngFor="let item of [cuartos['detalle1'], cuartos['detalle2'], cuartos['detalle3']]" >
+                    <ion-label>{{item}}</ion-label>
+                  </ion-item>
+              </ion-item-group>
+            <ion-item-group mode="ios">
+              <ion-item-divider mode="ios">
+                <ion-label>CALIFICAR</ion-label>
+              </ion-item-divider>
+              <ion-item mode="ios" lines="none" >
+                <ion-icon class="like" name="thumbs-up" slot="start"></ion-icon>
+                <ion-icon class="dislike" name="thumbs-down" slot="end"></ion-icon>
+              </ion-item>
+            </ion-item-group>
+
+            <ion-item-group mode="ios">
+              <ion-item-divider mode="ios">
+                <ion-label>ESTADO</ion-label>
+              </ion-item-divider>
+              <ion-item mode="ios" lines="none">{{cuartos['estado']}}</ion-item>
+            </ion-item-group>
+
+            <ion-item-group mode="ios">
+              <ion-item-divider mode="ios">
+                <ion-label>OPINIONES</ion-label>
+              </ion-item-divider>
+              <!--<ion-item mode="ios" lines="none">-->
+                <ion-item mode="ios" lines="none">
+                  <ion-avatar slot="start">
+                    <img src="../../assets/avatars/av-2.png" />
+                  </ion-avatar>
+                  <ion-label>
+                    <h4>{{usuarioStorage.split('-')[0]}}</h4>
+                  </ion-label>
+                </ion-item>
+                <ion-item mode="ios" id="texto" lines="none">
+                  <ion-textarea [(ngModel)]="comentario" clearOnEdit="true" placeholder="¿Qué te pareció esta Habitación?"></ion-textarea>
+                </ion-item>
+                <ion-item lines="none" *ngIf="comentario != ''" >
+                  <ion-button mode="ios" slot="end" color="secondary" (click)="publicar()">Publicar</ion-button>
+                  <ion-button mode="ios" slot="end" color="danger" (click)="cancel('Advertencia', '', '¿Seguro desea cancelar la publicacion?')">Cancelar</ion-button>
+                </ion-item><br>
+                <!--Comentarios de los clientes-->
+                <div class="comentarios" *ngFor="let item of [1,1,1]">
+                  <ion-item mode="ios"  lines="none">
+                    <ion-avatar slot="start">
+                      <img src="../../assets/avatars/av-6.png" />
+                    </ion-avatar>
+                    <ion-label>
+                      <h4>Mario Alvarenga</h4>
+                    </ion-label>
+                  </ion-item>
+                  <ion-item mode="ios" id="texto" lines="none">
+                    <ion-label text-wrap>Esta Suite es de las mejores en las que me he podido hospedar en toda la Union</ion-label>
+                  </ion-item>
+                </div>
+              <!--</ion-item>-->
+            </ion-item-group>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+</ion-content>
+<ion-footer color="dark">
+  <ion-toolbar color="dark">
+    <!--<ion-grid fixed>-->
+      <ion-row>
+        <ion-col text-start sizeLg="3" sizeMd="3" sizeSm="3" sizeXs="3">
+            <ion-button size="small" mode="ios" color="warning" (click)="addFavoritos(cuartos)">
+              <ion-icon mode="ios" slot="start" name="heart" color="dark"></ion-icon>
+              <ion-label class="ion-text-capitalize" color="dark">Favoritos</ion-label>
+            </ion-button>    
+        </ion-col>
+        <ion-col sizeLg="1" sizeMd="1" sizeSm="1" sizeXs="1"></ion-col>
+        <ion-col align-self-center text-center sizeLg="4" sizeMd="4" sizeSm="4" sizeXs="4">
+          <!--<ion-label class="precio" color="warning">{{cuartos['precio24h'] | currency:'USD'}}</ion-label>-->
+          <ion-button class="btnprecio" size="small" mode="ios" color="dark">
+            <ion-label class="ion-text-capitalize" color="warning">{{cuartos['precio24h'] | currency:'USD'}}</ion-label>
+          </ion-button>
+        </ion-col>
+        <ion-col text-end sizeLg="3" sizeMd="3" sizeSm="3" sizeXs="3">
+            <ion-button size="small" mode="ios" color="warning" (click)="openReservacion(cuartos)">
+                <ion-icon mode="ios" slot="start" name="hand" color="dark"></ion-icon>
+                <ion-label class="ion-text-capitalize" color="dark">Reservar</ion-label>
+              </ion-button>  
+        </ion-col>
+        <ion-col sizeLg="1" sizeMd="1" sizeSm="1" sizeXs="1"></ion-col>
+      </ion-row>
+    <!--</ion-grid>-->
+  </ion-toolbar>
+</ion-footer>

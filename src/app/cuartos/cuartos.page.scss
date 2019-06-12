@@ -1,0 +1,75 @@
+.imgDetalle, .imgD{
+    display: block;
+    position: relative;
+    //width: 150px;
+}
+.imgDetalle p {
+    background-color: rgba(255,255,255,.8);
+  display: block;
+  position: absolute;
+  bottom: -35px;
+  left: 0;
+  padding: -5px;
+  width: 100%;
+}
+.imgDetalle{
+    border-radius: 5px;
+    background: rgb(214, 214, 214);
+}
+.buttonFav{
+    text-align: center;
+}
+/*.swiper-container {
+    height: 350px;
+}
+
+.swiper-wrapper {
+    height: 350px;
+} 
+ion-slide > ion-img{
+    height: 350px !important;
+}*/
+ion-col > ion-button{
+    height: 40px;
+    border-radius: 10px;
+    width: 110px;
+    font-size: 12px;
+}
+.precio{
+    font-size: 14px;
+}
+.prec{
+    width: 50px;
+    height: 30px;
+    border: 1px solid white;
+    border-radius: 20px;
+}
+.dislike:hover, .dislike:active{
+    color: #f04141 !important;
+    --background: #f04141;
+    transform: scale(1.4);
+    cursor: pointer;
+}
+.like:hover, .like:active{
+    color: #3880ff !important;
+    --background: #3880ff;
+    transform: scale(1.4);
+    cursor: pointer;
+}
+.nota{
+    width: 50px;    
+    height: 50px;
+    background: #10dc60;
+    color: white;
+    font-size: 15px;
+}
+.notaa{
+    font-size: 18px;
+}
+.btnprecio{
+    border: 1px solid white !important;
+}
+ion-textarea{
+    border: 1px solid rgba(128, 128, 128, 0.87) !important;
+    border-radius: 5px;
+}

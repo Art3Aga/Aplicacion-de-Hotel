@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Titan+One');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans|Titan+One');
+
+.titulo{
+  font-family: 'Titan One', cursive;
+  font-size: 15px;
+}
+/*.loginBar{
+  color: #3880ff !important;
+  //--background: rgba(0, 0, 0, 0.05);
+  --background: white;
+  font-size: 13px;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: bold;
+}*/
+.item-md.item-input .item-inner {
+  border-bottom-color: red !important;
+}
+#titulo{
+  color: #11b0eb;
+}
+#separador{
+  color: transparent;
+}
+ion-item{
+  transition: all 2s ease-in-out !important;
+}
+ion-item:hover{
+  //transition: --background #d6f0faea 1.5s;
+  --background: #d6f0fad5;
+  cursor: pointer;
+}
+.ver{
+  transition: all .2s ease-in-out !important;
+}
+.ver:hover{
+  transform: scale(1.4);
+}
+.preview{
+  width: 425px;
+  height: 525px;
+  //background: #11b1eb70;
+  //background: #222428;
+  //background: #d6f0fad5;
+  background: #11b0eb;
+  border-radius: 5px;
+  position: fixed;
+  text-align: center;
+  word-wrap: break-word;
+  overflow: auto;
+}

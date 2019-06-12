@@ -1,0 +1,19 @@
+.container{
+    position: relative;
+    text-align: center;
+    color: white;
+    background-color: rgb(228, 57, 57);
+    z-index: 0;
+}
+ion-img{
+    background-color: rgb(231, 228, 228);
+}
+.centro{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}

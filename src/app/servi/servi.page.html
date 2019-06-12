@@ -1,0 +1,53 @@
+<ion-header mode="ios" no-border translucent>
+  <ion-toolbar color="secondary" mode="ios">
+    <ion-title mode="ios" text-center>Servicios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col sizeLg="6" sizeMd="6" sizeSm="12" sizeXs="12">
+        <ion-card mode=ios>
+          <!--<ion-icon class="icono" name="body"></ion-icon>-->
+          <ion-card-header mode=ios>
+            <ion-card-subtitle mode=ios></ion-card-subtitle>
+            <ion-card-title mode=ios>¿SOLO QUIERES VISITARNOS POR UN DIA?</ion-card-title>
+          </ion-card-header>
+          <ion-card-content mode=ios>
+            <ion-item lines="none" mode=ios>
+              <ion-label class="brindar" mode=ios text-wrap>
+                Solo brindanos tus datos para poder reservar tu estadia de un día
+              </ion-label>
+              <ion-icon class="icono" mode=ios slot="end" name="hand"></ion-icon>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col sizeLg="6" sizeMd="6" sizeSm="12" sizeXs="12">
+        <ion-card mode=ios>
+          <!--<ion-icon class="icono" name="body"></ion-icon>-->
+          <ion-card-header mode=ios>
+            <ion-card-subtitle mode=ios></ion-card-subtitle>
+            <ion-card-title mode=ios>AQUI EN TOROLA BAY VIEW ¡PUEDES!</ion-card-title>
+          </ion-card-header>
+          <ion-card-content mode=ios>
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col sizeLg="4" sizeMd="4" sizeSm="12" sizeXs="12">
+                </ion-col>
+                <ion-col sizeLg="4" sizeMd="4" sizeSm="12" sizeXs="12">
+                  <ion-button (click)="llenarForm()" mode=ios color="primary">
+                    LLenar Formulario
+                  </ion-button>
+                </ion-col>
+                <ion-col sizeLg="4" sizeMd="4" sizeSm="12" sizeXs="12"></ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    
+  </ion-grid>
+</ion-content>

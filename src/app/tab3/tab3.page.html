@@ -1,0 +1,152 @@
+<ion-header mode="ios" translucent>
+  <ion-toolbar mode="ios" translucent color="secondary">
+    <ion-title text-center color="light">
+      Favoritos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <!--<ion-card *ngFor="let item of favoritos | async" >
+    <ion-img [src]="item['imgPrincipal']"></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle>{{item['titulo']}}</ion-card-subtitle>
+      <ion-card-title><a>{{item['precio24h']}}</a></ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      
+    </ion-card-content>
+  </ion-card>-->
+
+
+
+  <!--<ion-list>
+    <ion-item-sliding *ngFor="let item of favoritos | async">
+        <ion-item> 
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-img [src]="item.imgPrincipal"></ion-img>
+                  </ion-col>
+                  <ion-col size="6">
+                    <br>
+                    <ion-label>{{item.titulo}}</ion-label>
+                    <br><br>
+                    <a>{{item.precio24h | currency:'USD'}}</a>
+                  </ion-col>
+                </ion-row>
+        </ion-item>
+      <ion-item-options side="start">
+        <ion-item-option (click)="messageDeleteFav('¿Borrar de Favoritos?', 'Esta Habitacion será eliminada de sus Favoritos', 'Cancelar', 'Aceptar', item.titulo)" color="danger">Borrar</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>-->
+
+  <div class="favoritos" *ngIf="usuario == 'usuario-usuario'" >
+    <ion-slides id="slideNohay">
+      <ion-slide id="slideNohay">
+        <ion-label mode="ios">¡No hay Favoritos!</ion-label>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col size="1"></ion-col>
+      <ion-col size="10">
+        <div class="sliding" *ngIf="usuario != 'usuario-usuario'" >
+          <ion-item-sliding mode="ios" *ngFor="let room of favoritos | async"  >
+            <ion-item mode="ios">
+                <ion-grid fixed>
+                    <ion-row>
+                      <ion-col sizeLg="4" sizeMd="4" sizeSm="12" sizeXs="12">
+                        <!--<ion-img [src]="room.imgPrincipal"></ion-img>-->
+                        <ion-slides #slides pager="false" (ionSlidesDidLoad)="autoPlay(slides)" [options]="slideOpts"
+                        (ionSlideTap)="autoPlay(slides)" 
+                        (ionSlideDidChange)="autoPlay(slides)" class="slidess"  mode="ios" pager="ios" scrollbar="ios">
+                          <ion-slide>
+                            <img src="{{room.imgPrincipal}}">
+                          </ion-slide>
+                          <ion-slide>
+                            <img src="{{room.imgScroll1}}">
+                          </ion-slide>
+                          <ion-slide>
+                            <img src="{{room.imgScroll2}}">
+                          </ion-slide>
+                          <ion-slide>
+                            <img src="{{room.imgScroll3}}">
+                          </ion-slide>
+                          <ion-slide>
+                            <img src="{{room.imgScroll4}}">
+                          </ion-slide>
+                        </ion-slides>
+                      </ion-col>
+                      <ion-col sizeLg="1" sizeMd="1" sizeSm="1" sizeXs="1">
+                        <!--<ion-label id="separador"></ion-label>-->
+                      </ion-col>
+                      <ion-col sizeLg="7" sizeMd="7" sizeSm="12" sizeXs="12">
+                        <ion-row>
+                          <ion-col size="12">
+                              <h5 id="titulo">{{room.titulo}}</h5>
+                              <br>
+                              <ion-label color="medium" text-wrap> {{room.descrip}} </ion-label>
+                              <ion-chip color="tertiary"  outline="true">
+                                <ion-label>{{room.categoria}}</ion-label>
+                                <ion-icon name="bed"></ion-icon>
+                              </ion-chip>
+                          </ion-col>
+                        </ion-row>
+                        <ion-row>
+                          <ion-col size="4">
+                            <br>
+                            <ion-icon *ngFor="let item of [1,1,1,1,1]"  color="warning" name="star-half"></ion-icon>
+                          </ion-col>
+                          <ion-col size="4">
+                            <p>{{room.precio24h | currency: 'USD'}}/Noche</p>
+                          </ion-col>
+                          <ion-col size="4">
+                              <ion-button mode="ios" (click)="messageDeleteFav('¿Borrar de Favoritos?', 'Esta Habitacion será eliminada de sus Favoritos', 'Cancelar', 'Aceptar', room.titulo)" class="ver" color="danger">
+                                Borrar 
+                                <ion-icon slot="end" name="trash"></ion-icon>
+                              </ion-button>
+                              <ion-button (click)="cuartoModal(room)" mode="ios" class="ver" color="secondary">
+                                Ver
+                                <ion-icon slot="end" name="eye"></ion-icon>
+                              </ion-button>
+                            </ion-col>
+                        </ion-row>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+            </ion-item>   
+            <ion-item-options mode="ios" side="end">
+                <ion-item-option mode="ios" (click)="messageDeleteFav('¿Borrar de Favoritos?', 'Esta Habitacion será eliminada de sus Favoritos', 'Cancelar', 'Aceptar', room.titulo)" color="danger">
+                  <ion-icon slot="icon-only" name="trash"></ion-icon>
+                </ion-item-option>
+              </ion-item-options> 
+          </ion-item-sliding>
+        </div>
+      </ion-col>
+      <ion-col size="1"></ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+
+
+  <!--<ion-grid *ngFor="let item of favoritos | async" fixed>
+      <ion-row>
+        <ion-col size="6">
+          <ion-img [src]="item.imgPrincipal"></ion-img>
+        </ion-col>
+        <ion-col size="6">
+          <br>
+          <ion-label>{{item.titulo}}</ion-label>
+          <br><br>
+          <a>{{item.precio24h | currency:'USD'}}</a>
+        </ion-col>
+      </ion-row>
+      <br>
+    </ion-grid>-->
+</ion-content>

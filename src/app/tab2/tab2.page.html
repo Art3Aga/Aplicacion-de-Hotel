@@ -1,0 +1,23 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios" color="secondary">
+    <!--<ion-title color="light" text-center>Categorias</ion-title>-->
+    <ion-searchbar mode="ios" (ionChange)="search( $event )" placeholder="Buscar Categoria" color="secondary" animated></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--<div class="container">
+    <ion-img src="http://www.surabayasuites.com/resources/900x500_Business-Suite-(Twin).jpg"></ion-img>
+    <div class="centro">Suites</div>
+  </div>-->
+
+<ion-slides [options]="opcionesSlide"  *ngFor="let item of categ"  pager="false">
+  <ion-slide>
+    <br>
+    <ion-img (click)="nextPage(item.titulo)"  [src]="item.img"></ion-img>
+    <div class="centro">{{item.titulo}}</div>
+    <br>
+  </ion-slide>
+  <br>
+</ion-slides>
+</ion-content>

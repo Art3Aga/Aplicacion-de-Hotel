@@ -1,0 +1,125 @@
+<ion-header no-border translucent mode=ios>
+  <ion-toolbar color="secondary" mode=ios>
+    <ion-buttons mode="ios" slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon mode="ios" slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title mode=ios>Reservacion en Visitas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-item-group mode="ios">
+        <ion-item-divider mode="ios">
+          <ion-label>DATOS PERSONALES</ion-label>
+        </ion-item-divider>
+        <ion-item mode="ios" >
+          <ion-icon slot="end" name="contact" mode="ios"></ion-icon>
+          <ion-input mode="ios" name="email" type="text" placeholder="Nombre Completo" [(ngModel)]="nombre" [ngModelOptions]="{standalone: true}" required></ion-input>
+        </ion-item>
+        <ion-item mode="ios" >
+          <ion-icon slot="end" name="finger-print" mode="ios"></ion-icon>
+          <ion-input mode="ios" type="tel" maxlength="10" name="name" placeholder="DUI" [(ngModel)]="dui" [ngModelOptions]="{standalone: true}" required></ion-input>
+        </ion-item>
+        <ion-item mode="ios" >
+          <ion-icon slot="end" name="call" mode="ios"></ion-icon>
+          <ion-input mode="ios" name="email" maxlength="8" type="tel" placeholder="Nº Telefonico" [(ngModel)]="tel" [ngModelOptions]="{standalone: true}" required></ion-input>
+        </ion-item>
+        <ion-item mode="ios" >
+          <ion-icon slot="end" name="pin" mode="ios"></ion-icon>
+          <ion-input mode="ios" name="email"  type="text" placeholder="Direccion" [(ngModel)]="dir" [ngModelOptions]="{standalone: true}" required></ion-input>
+        </ion-item>
+      </ion-item-group>
+    
+    
+      <!--DATOS DE RESERVACION-->
+    
+      <ion-item-group mode="ios">
+        <ion-item-divider mode="ios">
+          <ion-label>DATOS DE RESERVACION</ion-label>
+        </ion-item-divider>                    
+        <ion-item mode="ios" >
+          <!--<ion-input name="password" type="text" placeholder="Inicio Estadia" ngModel required></ion-input>-->
+          <ion-icon mode="ios" slot="start" name="calendar"></ion-icon>
+          <ion-label mode="ios">Fecha de Inicio</ion-label>
+          <ion-datetime [(ngModel)]="fechIn" [ngModelOptions]="{standalone: true}" mode="ios" placeholder="" display-format="YYYY MMM DD" min="2019" max="2019" cancel-text="Cancelar" 
+          done-text="Aceptar"></ion-datetime>
+        </ion-item>
+        <ion-item mode="ios">
+          <ion-icon mode="ios" slot="start" name="time"></ion-icon>
+          <!--<ion-input name="password" type="text" placeholder="Inicio Estadia" ngModel required></ion-input>-->
+          <ion-label mode="ios">Hora de Inicio</ion-label>
+          <ion-datetime [(ngModel)]="hourIn" [ngModelOptions]="{standalone: true}" mode="ios" placeholder="" display-format="h:mm:A" min="2019" max="2019" cancel-text="Cancelar" 
+          done-text="Aceptar"></ion-datetime>
+        </ion-item>
+        
+        <!--<ion-item mode="ios" >
+          <ion-icon mode="ios" slot="start" name="calendar"></ion-icon>
+          <ion-label mode="ios">Fin Uso (Fecha)</ion-label>
+          <ion-datetime [(ngModel)]="fechFin" [ngModelOptions]="{standalone: true}" mode="ios" placeholder="" display-format="YYYY MMM DD" min="2019" max="2019" cancel-text="Cancelar" 
+          done-text="Aceptar"></ion-datetime>
+        </ion-item>
+        <ion-item mode="ios" >
+          <ion-icon mode="ios" slot="start" name="time"></ion-icon>
+          <ion-label mode="ios">Fin Uso (Hora)</ion-label>
+          <ion-datetime [(ngModel)]="hourFin" [ngModelOptions]="{standalone: true}" mode="ios" placeholder="" display-format="h:mm:A" min="2019" max="2019" cancel-text="Cancelar" 
+          done-text="Aceptar"></ion-datetime>
+        </ion-item>-->
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider mode=ios>
+          <ion-label mode=ios text-wrap>¡RESERVA ALGUNO DE NUESTROS SERVICIOS!</ion-label>
+        </ion-item-divider>
+        <ion-list>
+            <ion-item-sliding mode=ios *ngFor="let item of services | async">
+                <ion-item mode=ios>
+                  <ion-avatar mode=ios slot="start">
+                    <img [src]="item.img" />
+                  </ion-avatar>
+                  <ion-label mode=ios>{{item.titulo}}</ion-label>
+                  <ion-badge mode=ios slot="end" color="primary">{{item.cantidad}}</ion-badge>
+                  <ion-button (click)="presentActionSheet(item)" mode=ios class="mas" slot="end">
+                    <ion-icon class="mas" slot="icon-only" color="dark" name="more"></ion-icon>
+                  </ion-button>
+                </ion-item>
+              <ion-item-options mode=ios side="end">
+                <ion-item-option (click)="reservarModal(item)" mode=ios color="primary">
+                  Reservar
+                  <ion-icon slot="start" name="hand"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
+      </ion-item-group>
+</ion-content>
+
+<ion-footer color="dark">
+    <ion-toolbar color="dark">
+      <!--<ion-grid fixed>-->
+        <ion-row>
+          <ion-col text-start sizeLg="3" sizeMd="3" sizeSm="3" sizeXs="3">
+            <!--<ion-button size="small" mode="ios" color="warning">
+              <ion-icon mode="ios" slot="start" name="contact" color="dark"></ion-icon>
+              <ion-label color="dark">Registrarse</ion-label>
+            </ion-button>-->  
+          </ion-col>
+          <ion-col sizeLg="1" sizeMd="1" sizeSm="1" sizeXs="1"></ion-col>
+          <ion-col align-self-center text-center sizeLg="4" sizeMd="4" sizeSm="4" sizeXs="4">
+            <ion-button (click)="registrarVisita()" size="small" mode="ios" color="warning">
+              <ion-icon mode="ios" slot="start" name="contact" color="dark"></ion-icon>
+            <ion-label color="dark">Registrarse</ion-label>
+            </ion-button>
+          </ion-col>
+          <ion-col text-end sizeLg="3" sizeMd="3" sizeSm="3" sizeXs="3">
+            <!--<ion-button size="small" mode="ios" color="warning" 
+            (click)="roomPedidoDetalle(dui, tel, dir, fechIn, fechFin, hourIn, hourFin, valor['titulo'])">
+              <ion-icon mode="ios" slot="start" name="hand" color="dark"></ion-icon>
+                <ion-label class="ion-text-capitalize" color="dark">Reservar</ion-label>
+            </ion-button>  -->
+          </ion-col>
+          <ion-col sizeLg="1" sizeMd="1" sizeSm="1" sizeXs="1"></ion-col>
+        </ion-row>
+      <!--</ion-grid>-->
+    </ion-toolbar>
+  </ion-footer>
