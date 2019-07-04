@@ -58,20 +58,24 @@
                     <ion-slides #slides pager="false" (ionSlidesDidLoad)="autoPlay(slides)" [options]="slideOpts"
                     (ionSlideTap)="autoPlay(slides)" 
                     (ionSlideDidChange)="autoPlay(slides)" class="slidess" mode="md" pager="md" scrollbar="md">
-                      <ion-slide>
-                        <img src="{{room.imgPrincipal}}">
+                      <ion-slide class="image-slide">
+                        <!--<img src="{{room.imgPrincipal}}">-->
+                        <ion-img src="{{room.imgPrincipal}}"></ion-img>
                       </ion-slide>
-                      <ion-slide>
-                        <img src="{{room.imgScroll1}}">
+                      <ion-slide class="image-slide">
+                        <!--<img src="{{room.imgScroll1}}">-->
+                        <ion-img src="{{room.imgScroll1}}"></ion-img>
                       </ion-slide>
-                      <ion-slide>
-                        <img src="{{room.imgScroll2}}">
+                      <ion-slide class="image-slide">
+                        <!--<img src="{{room.imgScroll2}}">-->
+                        <ion-img src="{{room.imgScroll2}}"></ion-img>
                       </ion-slide>
-                      <ion-slide>
-                        <img src="{{room.imgScroll3}}">
+                      <ion-slide class="image-slide">
+                        <!--<img src="{{room.imgScroll3}}">-->
+                        <ion-img src="{{room.imgScroll3}}"></ion-img>
                       </ion-slide>
-                      <ion-slide>
-                        <img src="{{room.imgScroll4}}">
+                      <ion-slide class="image-slide">
+                        <ion-img src="{{room.imgScroll4}}"></ion-img>
                       </ion-slide>
                     </ion-slides>
                   </ion-col>

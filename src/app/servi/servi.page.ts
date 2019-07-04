@@ -12,9 +12,12 @@ import { ReservicioPage } from '../reservicio/reservicio.page';
 })
 export class ServiPage implements OnInit {
   servicios:any[] = []
+  usuario:string
   services:Observable<any[]>
   constructor(public actionSheetController: ActionSheetController,
-    public afDB: AngularFireDatabase, public modalCtrl: ModalController) { }
+    public afDB: AngularFireDatabase, public modalCtrl: ModalController) {
+      localStorage.getItem('usuario') == null ? this.usuario = "usuario-usuario" : this.usuario = localStorage.getItem('usuario')
+    }
 
   ngOnInit() {
     this.services = this.afDB.list(`servicios`).valueChanges()

@@ -102,7 +102,7 @@ export class ReservicioPage implements OnInit {
             if(cant > 0 && this.canti < cant ){
               //let total:number = cant * parseInt(JSON.stringify(this.valor['precioU']))
               this.total = this.canti * parseInt(JSON.stringify(this.valor['precioU']))
-              let reservarDetalle = this.afDB.object(`/registroVisitas/${this.datosPersonales['nombre']}/${this.valor['titulo']}/reservado`)
+              let reservarDetalle = this.afDB.object(`/registroVisitas/${this.datosPersonales['nombre']}/reservado/${this.valor['titulo']}`)
               .update({
                 dui, tel, dir, cantidad: this.canti, fechaIn, hourIn, reservado: servicioReservado, total: this.total,  
                 fechaPeticion: this.getDate(), horaPeticion: this.getTime(), nombre: this.datosPersonales['nombre']
@@ -113,7 +113,7 @@ export class ReservicioPage implements OnInit {
               if(reservarDetalle && restarServicio){
                 this.presentAlert2('¡Reservacion Realizada!', '', `Se ha reservado: ${this.canti} ${this.valor['titulo']}\nA nombre de: ${this.datosPersonales['nombre']}.
                 \nIniciando: ${this.datosPersonales['fechIn']} a las ${this.datosPersonales['hourIn']}\nDurante 1 dia\n
-                Con un precio Total de: $${this.total}`)
+                Con un precio Total de: $${this.total}\nRECUERDE AL LLEGAR AL HOTEL DAR SU NOMBRE PARA VERIFICAR SU RESERVACION`)
                 this.showMsm(`${this.datosPersonales['nombre']}, tu reservacion se ha realizado`, 4000, 'success')
               }
               else{

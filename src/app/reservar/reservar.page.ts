@@ -22,6 +22,7 @@ export class ReservarPage implements OnInit {
   hourFin:string = ""
   usuarioStorage:string = ""
   estado:string = ""
+  today = new Date()
   slideOpts = {
     effect: 'flip',
     loop: true,
@@ -47,6 +48,13 @@ export class ReservarPage implements OnInit {
     let yyyy = today.getFullYear();
     let hoy:string = dd + '/' + mm + '/' + yyyy;
     return hoy
+  }
+  getTime():string{
+    let horas = this.today.getHours()
+    let minutos = this.today.getMinutes()
+    let segundos = this.today.getSeconds()
+    let tiempo = horas+":" + minutos+":" +segundos;
+    return tiempo
   }
 
   roomPedidoDetalle(dui:string, tel:string, dir:string, fechaIn:string,
@@ -87,7 +95,7 @@ export class ReservarPage implements OnInit {
             })
             let removeDisponibles = this.afDB.database.ref(`disponibles/${this.valor['titulo']}`).remove()
             
-            let setOcupados = this.afDB.object(`/ocupados/${this.valor['titulo']}`).set({
+            let setOcupados = this.afDB.object(`/ocupados/${this.valor['titulo']}`).update({
               categoria: this.valor['categoria'],
               descrip: this.valor['descrip'],
               detalle1: this.valor['detalle1'],
@@ -100,18 +108,24 @@ export class ReservarPage implements OnInit {
               imgScroll2: this.valor['imgScroll2'],
               imgScroll3: this.valor['imgScroll3'],
               imgScroll4: this.valor['imgScroll4'],
-              llegada: `${fechaIn}-${hourIn}`,
+              diaLlegada: fechaIn,
+              diaSalida: fechaFin,
+              hourSalida: hourFin,
+              hourLlegada: hourIn,
               medidaCama: this.valor['medidaCama'],
               medidaCuarto: this.valor['medidaCuarto'],
               precio24h: this.valor['precio24h'],
               precioTotal: this.valor['precioTotal'],
-              salida: `${fechaFin}-${hourFin}`,
               titulo: this.valor['titulo'],
+              nombre: this.usuarioStorage.split('-')[0],
+              password: this.usuarioStorage.split('-')[1],
+              horaPeticion: this.getTime(),
+              diaPeticion: this.getDate()
             })
             
             if(reservarDetalle && reservarEstado && setOcupados && removeDisponibles){
               this.presentAlert2('¡Reservacion Realizada!', '', `Se ha reservado: "${this.valor['titulo']}"\nA nombre de: ${this.usuarioStorage.split('-')[0]}.
-              \nIniciando: ${this.fechIn} a las ${this.hourIn}\ny Finalizando: ${this.fechFin} a las ${this.hourFin}`)
+              \nIniciando: ${this.fechIn} a las ${this.hourIn}\ny Finalizando: ${this.fechFin} a las ${this.hourFin}\nRECUERDE AL LLEGAR AL HOTEL DAR SU NOMBRE PARA VERIFICAR SU RESERVACION`)
               this.showMsm(`${this.usuarioStorage}, tu reservacion se ha realizado`, 2000, 'success')
             }
             else{

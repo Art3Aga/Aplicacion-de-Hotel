@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalvisitasPage implements OnInit {
   servicio:Observable<any>
+  usuario:string
   dui:string = ""
   tel:string = ""
   dir:string = ""
@@ -18,7 +19,6 @@ export class ModalvisitasPage implements OnInit {
   fechFin:string = ""
   hourIn:string = ""
   hourFin:string = ""
-  usuarioStorage:string = ""
   cantidad:string = ""
   canti:number = 0
   estado:string = ""
@@ -29,7 +29,17 @@ export class ModalvisitasPage implements OnInit {
   services:Observable<any[]>
   constructor(public modalCtrl: ModalController,public afDB:AngularFireDatabase, 
     public alertController: AlertController, public toastController: ToastController,
-    public actionSheetController: ActionSheetController) { }
+    public actionSheetController: ActionSheetController) { 
+      //localStorage.getItem('usuario') == null ? this.usuario = "usuario-usuario" : this.usuario = localStorage.getItem('usuario')
+      if(localStorage.getItem('usuario') == null){
+        this.usuario = "usuario-usuario"
+        this.nombre = ""
+      }
+      else{
+        this.usuario = localStorage.getItem('usuario')
+        this.nombre = this.usuario.split('-')[0]
+      }
+    }
 
   ngOnInit() {
     this.getDate()
@@ -200,25 +210,28 @@ export class ModalvisitasPage implements OnInit {
     await alert.present();
   }
   registrarVisita(){
-    if(this.dui == null || this.tel == "" || this.dir == "" || this.fechIn == "" || this.hourIn == "" || this.nombre == ""){
-      this.presentAlert3('Falta de Datos', '', 'Debe Ingresar todos los datos requeridos')
-    }
-    else{
-      let registro = this.afDB.object(`registroVisitas/${this.nombre}`).update({
-        nombre: this.nombre,
-        dui: this.dui,
-        tel: this.tel,
-        dir: this.dir,
-        fechaIn: this.fechIn,
-        hourIn: this.hourIn
-      })
-      if(registro){
-        this.presentAlert3('¡Registrado Correctamente!', '' , `${this.nombre.split(' ')[0]}, Se ha reservado su estadia
-        en Hotel Torola Bay View empezando el : ${this.fechIn} a las ${this.hourIn}, estadia de 1 dia`)
-        this.showMsm(`${this.nombre.split('-')[0]}\nSe ha realizado su estadia de 1 dia`, 4000, 'success')
-        this.registrado = true
+
+      if(this.dui == null || this.tel == "" || this.dir == "" || this.fechIn == "" || this.hourIn == "" || this.nombre == ""){
+        this.presentAlert3('Falta de Datos', '', 'Debe Ingresar todos los datos requeridos')
+      }
+      else{
+        let registro = this.afDB.object(`registroVisitas/${this.nombre}`).update({
+          nombre: this.nombre,
+          dui: this.dui,
+          tel: this.tel,
+          dir: this.dir,
+          fechaIn: this.fechIn,
+          hourIn: this.hourIn
+        })
+        if(registro){
+          this.presentAlert3('¡Registrado Correctamente!', '' , `${this.nombre.split(' ')[0]}, Se ha reservado su estadia
+          en Hotel Torola Bay View empezando el : ${this.fechIn} a las ${this.hourIn}, estadia de 1 dia\n
+          Tambien puede reservar alguno de nuestros servicios que se presentan acontinuacion
+          \nRECUERDE AL LLEGAR AL HOTEL DAR SU NOMBRE PARA VERIFICAR SU RESERVACION`)
+          this.showMsm(`${this.nombre.split('-')[0]}\nSe ha realizado su estadia de 1 dia`, 4000, 'success')
+          this.registrado = true
+        }
       }
     }
-  }
 
 }

@@ -27,10 +27,14 @@ import { FiltroPipe } from './filtro.pipe';
 import { PipesModule } from "./pipes/pipes/pipes.module";
 import { ReservicioPage } from './reservicio/reservicio.page';
 import { ReservicioPageModule } from './reservicio/reservicio.module';
+import { DomSanitizerPipe } from './pipes/dom-sanitizer.pipe';
+import { ServiceWorkerModule } from '@angular/service-worker';
 //import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
-  declarations: [AppComponent, MPipe, FiltroPipe],
+  declarations: [
+    AppComponent, MPipe, FiltroPipe, DomSanitizerPipe
+  ],
   entryComponents: [CuartosPage, ReservarPage, ReservicioPage, ModalvisitasPage],
   imports: [
     BrowserModule, 
@@ -44,7 +48,8 @@ import { ReservicioPageModule } from './reservicio/reservicio.module';
     ReservarPageModule,
     ReservicioPageModule,
     ModalvisitasPageModule,
-    PipesModule
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    //PipesModule
 
   ],
   providers: [
